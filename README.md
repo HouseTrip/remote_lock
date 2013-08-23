@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/HouseTrip/remote_lock.png)](https://travis-ci.org/HouseTrip/remote-lock)
+[![Build Status](https://travis-ci.org/HouseTrip/remote_lock.png)](https://travis-ci.org/HouseTrip/remote_lock)
 
 remote_lock
 ===========

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["julien.letessier@gmail.com", "tscolari@gmail.com", "arne.hartherz@makandra.de", "pkunha@gmail.com", "kle@housetrip.com"]
   gem.description   = %q(remote-based mutexes)
   gem.summary       = %q{Leverages (memcached|redis)'s atomic operation to provide a distributed locking / synchromisation mechanism.}
-  gem.homepage      = "http://github.com/HouseTrip/remote-lock"
+  gem.homepage      = "http://github.com/HouseTrip/remote_lock"
   gem.license       = 'MIT'
 
   # gem.add_runtime_dependancy

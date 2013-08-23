@@ -6,8 +6,8 @@ require 'remote_lock/version'
 Gem::Specification.new do |gem|
   gem.name          = "remote_lock"
   gem.version       = RemoteLock::VERSION
-  gem.authors       = ["Julien Letessier", "Tiago Scolari", "Arne Hartherz"]
-  gem.email         = ["julien.letessier@gmail.com"]
+  gem.authors       = ["Julien Letessier", "Tiago Scolari", "Arne Hartherz", "Pedro Cunha", "Khiet Le"]
+  gem.email         = ["julien.letessier@gmail.com", "tscolari@gmail.com", "arne.hartherz@makandra.de", "pkunha@gmail.com", "kle@housetrip.com"]
   gem.description   = %q(remote-based mutexes)
   gem.summary       = %q{Leverages (memcached|redis)'s atomic operation to provide a distributed locking / synchromisation mechanism.}
   gem.homepage      = "http://github.com/HouseTrip/memcache-lock"

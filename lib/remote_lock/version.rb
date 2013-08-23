@@ -1,3 +1,3 @@
 class RemoteLock
-  VERSION = "0.4.0.b1"
+  VERSION = "1.0.0"
 end

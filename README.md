@@ -12,7 +12,7 @@ Installation
 ------------
 
 ```shell
-gem install ht-remote-lock
+gem install remote-lock
 ```
 
 Initialization

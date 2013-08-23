@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.org/HouseTrip/memcache-lock.png?branch=hacky-redis-support)](https://travis-ci.org/HouseTrip/memcache-lock)
+[![Build Status](https://travis-ci.org/HouseTrip/remote-lock.png?branch=master)](https://travis-ci.org/HouseTrip/remote-lock)
 
 remote_lock
 ===========
 
-This is a rewrite of a initial extraction from Nick Kallen's [cache-money](http://github.com/nkallen/cache-money).
+This is a rewrite of a initial extraction from Nick Kallen's [cache-money](http://github.com/nkallen/cache-money) and
+also a fork from James Golick [memcache-lock](https://github.com/jamesgolick/memcache-lock)
 
 This adds supports for memcache or redis as lock storage.
 

@@ -28,7 +28,7 @@ class RemoteLock
   def acquire_lock(key, options = {})
     options = DEFAULT_OPTIONS.merge(options)
     1.upto(options[:retries]) do |attempt|
-      success = @adapter.store(key, options[:expiry])
+      success = @adapter.store(key_for(key), options[:expiry])
       return if success
       break if attempt == options[:retries]
       Kernel.sleep(2 ** (attempt + rand - 1) * options[:initial_wait])
@@ -37,11 +37,17 @@ class RemoteLock
   end
 
   def release_lock(key)
-    @adapter.delete(key)
+    @adapter.delete(key_for(key))
   end
 
   def acquired?(key)
-    !!@adapter.has_key?(key)
+    !!@adapter.has_key?(key_for(key))
+  end
+
+  private
+
+  def key_for(string)
+    "lock/#{string}"
   end
 
 end

@@ -36,9 +36,5 @@ module RemoteLock::Adapters
       Thread.current[:thread_uid] ||= SecureRandom.hex(4)
     end
 
-    def key_for(string)
-      "lock/#{string}"
-    end
-
   end
 end

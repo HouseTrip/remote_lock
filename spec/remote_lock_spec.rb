@@ -119,6 +119,13 @@ describe RemoteLock do
         end
       end
 
+      context "lock prefixing" do
+        it "should prefix the key name when a prefix is set" do
+          lock = RemoteLock.new(adapter, "staging_server")
+          lock.acquire_lock("lock_key")
+          adapter.has_key?("staging_server/lock/lock_key").should be_true
+        end
+      end
     end
   end
 

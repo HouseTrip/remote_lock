@@ -7,9 +7,10 @@ class RemoteLock
     :retries      => 11,    # these defaults will retry for a total 41sec max
   }
 
-  def initialize(adapter)
+  def initialize(adapter, prefix = nil)
     raise "Invalid Adapter" unless Adapters::Base.valid?(adapter)
     @adapter = adapter
+    @prefix = prefix
   end
 
   def synchronize(key, options={})
@@ -47,7 +48,7 @@ class RemoteLock
   private
 
   def key_for(string)
-    "lock/#{string}"
+    [@prefix, "lock", string].compact.join('/')
   end
 
 end

@@ -15,31 +15,31 @@ module RemoteLock::Adapters
 
       describe "#store" do
         it "should store the lock in memcached" do
-          memcache.get("lock/#{test_key}").should be_nil
+          memcache.get(test_key).should be_nil
           adapter.store(test_key, 100)
-          memcache.get("lock/#{test_key}").should eq uid
+          memcache.get(test_key).should eq uid
         end
       end
 
       describe "#has_key?" do
         it "should return true if the key exists in memcache with uid value" do
-          memcache.add("lock/#{test_key}", uid)
+          memcache.add(test_key, uid)
           adapter.has_key?(test_key).should be_true
         end
 
         it "should return false if the key doesn't exist in memcache or is a different uid" do
-          memcache.add("lock/#{test_key}", "notvalid")
+          memcache.add(test_key, "notvalid")
           adapter.has_key?(test_key).should be_false
-          memcache.delete("lock/#{test_key}")
+          memcache.delete(test_key)
           adapter.has_key?(test_key).should be_false
         end
       end
 
       describe "#delete" do
         it "should remove the key from memcached" do
-          memcache.add("lock/#{test_key}", uid)
+          memcache.add(test_key, uid)
           adapter.delete(test_key)
-          memcache.get("lock/#{test_key}").should be_nil
+          memcache.get(test_key).should be_nil
         end
       end
     end

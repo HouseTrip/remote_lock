@@ -42,7 +42,7 @@ class RemoteLock
   end
 
   def acquired?(key)
-    !!@adapter.has_key?(key_for(key))
+    @adapter.has_key?(key_for(key))
   end
 
   private

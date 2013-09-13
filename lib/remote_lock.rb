@@ -48,7 +48,7 @@ class RemoteLock
   private
 
   def key_for(string)
-    [@prefix, "lock", string].compact.join('/')
+    [@prefix, "lock", string].compact.join('|')
   end
 
 end

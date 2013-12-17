@@ -74,13 +74,13 @@ describe RemoteLock do
           adapter.has_key?("lock|lock_key").should be_true
         end
 
-        specify "retries specified number of times" do
+        specify "retries as long as the expiry times is not reached" do
           lock.acquire_lock('lock_key')
           another_process do
-            adapter.should_receive(:store).exactly(3).times.and_return(false)
+            adapter.should_receive(:store).exactly(11).times.and_return(false)
             lambda {
-              lock.acquire_lock('lock_key', :expiry => 10, :retries => 3)
-            }.should raise_error(RemoteLock::Error)
+              lock.acquire_lock('lock_key', :expiry => 10)
+            }.should raise_error(RemoteLock::Error, "Couldn't acquire lock for: lock_key - Retried for 10.01 seconds in 11 attempt(s)")
           end
         end
 

@@ -78,9 +78,9 @@ describe RemoteLock do
           lock.acquire_lock('lock_key')
           another_process do
             adapter.should_receive(:store).exactly(11).times.and_return(false)
-            lambda {
+            expect {
               lock.acquire_lock('lock_key', :expiry => 10)
-            }.should raise_error(RemoteLock::Error, "Couldn't acquire lock for: lock_key - Retried for 10.01 seconds in 11 attempt(s)")
+            }.to raise_error(RemoteLock::Error, "Couldn't acquire lock for: lock_key - Retried for 10.01 seconds in 11 attempt(s)")
           end
         end
 
@@ -92,20 +92,20 @@ describe RemoteLock do
         specify "prevents two processes from acquiring the same lock at the same time" do
           lock.acquire_lock('lock_key')
           another_process do
-            lambda { lock.acquire_lock('lock_key') }.should raise_error(RemoteLock::Error)
+            expect { lock.acquire_lock('lock_key') }.to raise_error(RemoteLock::Error)
           end
         end
 
         specify "prevents two threads from acquiring the same lock at the same time" do
           lock.acquire_lock('lock_key')
           another_thread do
-            lambda { lock.acquire_lock('lock_key') }.should raise_error(RemoteLock::Error)
+            expect { lock.acquire_lock('lock_key') }.to raise_error(RemoteLock::Error)
           end
         end
 
         specify "prevents a given thread from acquiring the same lock twice" do
           lock.acquire_lock('lock_key')
-          lambda { lock.acquire_lock('lock_key') }.should raise_error(RemoteLock::Error)
+          expect { lock.acquire_lock('lock_key') }.to raise_error(RemoteLock::Error)
         end
       end
 

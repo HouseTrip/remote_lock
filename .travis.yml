@@ -6,3 +6,6 @@ rvm:
   - ree
 cache:
   - bundler
+services:
+ - memcached
+ - redis-server

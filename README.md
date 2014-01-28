@@ -12,7 +12,7 @@ Installation
 ------------
 
 ```shell
-gem install remote-lock
+gem install remote_lock
 ```
 
 Initialization

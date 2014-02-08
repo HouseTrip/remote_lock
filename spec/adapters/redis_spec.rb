@@ -20,6 +20,15 @@ module RemoteLock::Adapters
           redis.get(test_key).should eq uid
         end
 
+        it 'return truthy on success' do
+          adapter.store(test_key, 100).should be_true
+        end
+
+        it 'return falsy on failure' do
+          redis.set(test_key, uid)
+          adapter.store(test_key, 100).should be_false
+        end
+
         context "expiry" do
           it "should expire the key after the time is over" do
             adapter.store(test_key, 1)

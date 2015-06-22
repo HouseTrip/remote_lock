@@ -24,14 +24,14 @@ module RemoteLock::Adapters
       describe "#has_key?" do
         it "should return true if the key exists in memcache with uid value" do
           memcache.add(test_key, uid)
-          adapter.has_key?(test_key).should be_true
+          adapter.has_key?(test_key).should be(true)
         end
 
         it "should return false if the key doesn't exist in memcache or is a different uid" do
           memcache.add(test_key, "notvalid")
-          adapter.has_key?(test_key).should be_false
+          adapter.has_key?(test_key).should be(false)
           memcache.delete(test_key)
-          adapter.has_key?(test_key).should be_false
+          adapter.has_key?(test_key).should be(false)
         end
       end
 

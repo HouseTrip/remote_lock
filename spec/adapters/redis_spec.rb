@@ -21,25 +21,25 @@ module RemoteLock::Adapters
         end
 
         it 'return truthy on success' do
-          adapter.store(test_key, 100).should be_true
+          adapter.store(test_key, 100).should be(true)
         end
 
         it 'return falsy on failure' do
           redis.set(test_key, uid)
-          adapter.store(test_key, 100).should be_false
+          adapter.store(test_key, 100).should be(false)
         end
 
         context "expiry" do
           it "should expire the key after the time is over" do
             adapter.store(test_key, 1)
             sleep 1.1
-            redis.exists(test_key).should be_false
+            redis.exists(test_key).should be(false)
           end
 
           it "should expire the key after the time is over" do
             adapter.store(test_key, 10)
             sleep 0.5
-            redis.exists(test_key).should be_true
+            redis.exists(test_key).should be(true)
           end
         end
       end
@@ -47,14 +47,14 @@ module RemoteLock::Adapters
       describe "#has_key?" do
         it "should return true if the key exists in memcache with uid value" do
           redis.setnx(test_key, uid)
-          adapter.has_key?(test_key).should be_true
+          adapter.has_key?(test_key).should be(true)
         end
 
         it "should return false if the key doesn't exist in memcache or is a different uid" do
           redis.setnx(test_key, "notvalid")
-          adapter.has_key?(test_key).should be_false
+          adapter.has_key?(test_key).should be(false)
           redis.del(test_key)
-          adapter.has_key?(test_key).should be_false
+          adapter.has_key?(test_key).should be(false)
         end
       end
 

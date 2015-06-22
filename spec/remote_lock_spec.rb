@@ -24,22 +24,22 @@ describe RemoteLock do
         end
 
         it "acquires the specified lock before the block is run" do
-          adapter.has_key?("lock_key").should be_false
+          adapter.has_key?("lock_key").should be(false)
           lock.synchronize('lock_key') do
-            adapter.has_key?("lock|lock_key").should be_true
+            adapter.has_key?("lock|lock_key").should be(true)
           end
         end
 
         it "releases the lock after the block is run" do
-          adapter.has_key?("lock_key").should be_false
+          adapter.has_key?("lock_key").should be(false)
           expect { |call| lock.synchronize('lock_key', &call) }.to yield_control
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
         end
 
         it "releases the lock even if the block raises" do
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
           lock.synchronize('lock_key') { raise } rescue nil
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
         end
 
         specify "does not block on recursive lock acquisition" do
@@ -69,9 +69,9 @@ describe RemoteLock do
 
       describe '#acquire_lock' do
         specify "creates a lock at a given cache key" do
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
           lock.acquire_lock("lock_key")
-          adapter.has_key?("lock|lock_key").should be_true
+          adapter.has_key?("lock|lock_key").should be(true)
         end
 
         specify "retries specified number of times" do
@@ -111,11 +111,11 @@ describe RemoteLock do
 
       describe '#release_lock' do
         specify "deletes the lock for a given cache key" do
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
           lock.acquire_lock("lock_key")
-          adapter.has_key?("lock|lock_key").should be_true
+          adapter.has_key?("lock|lock_key").should be(true)
           lock.release_lock("lock_key")
-          adapter.has_key?("lock|lock_key").should be_false
+          adapter.has_key?("lock|lock_key").should be(false)
         end
       end
 
@@ -123,7 +123,7 @@ describe RemoteLock do
         it "should prefix the key name when a prefix is set" do
           lock = RemoteLock.new(adapter, "staging_server")
           lock.acquire_lock("lock_key")
-          adapter.has_key?("staging_server|lock|lock_key").should be_true
+          adapter.has_key?("staging_server|lock|lock_key").should be(true)
         end
       end
     end

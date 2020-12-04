@@ -18,7 +18,7 @@ module RemoteLock::Adapters
 
       # check if another client has the key.
       # it's important to still run a transaction to clear the watch.
-      have_competition = @connection.exists(key)
+      have_competition = @connection.respond_to?(:exists?) ? @connection.exists?(key) : @connection.exists(key)
 
       !! @connection.multi do
         break if have_competition
